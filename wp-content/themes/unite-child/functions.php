@@ -69,4 +69,24 @@ function new_taxonomy($tax) {
 }
 add_action( 'init', 'create_film_taxonomies', 0 );
 
+
+/**
+* Action hook for display Country, Genre, Ticket Price and Release Date
+*/
+function rmdb_get_film_terms_and_fields() {
+	// Get post id
+	$post_id = get_the_ID();
+	
+	echo get_the_term_list( $post_id, 'country', '<h4><small>Country:</small> ', ', ', '</h4>' );
+
+	echo get_the_term_list( $post_id, 'genre', '<h4><small>Genre:</small> ', ', ', '</h4>' );
+
+	if( get_field('ticket_price') )
+		echo '<h4><small>Ticket Price: </small>'.get_field('ticket_price').'</h4>';
+
+	if( get_field('release_date') )
+		echo '<h4><small>Release Date: </small>'.get_field('release_date').'</h4>';
+}
+add_action('rmdb_get_film_terms_and_fields', 'rmdb_get_film_terms_and_fields');
+
 ?>
