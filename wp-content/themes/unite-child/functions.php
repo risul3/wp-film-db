@@ -89,4 +89,27 @@ function rmdb_get_film_terms_and_fields() {
 }
 add_action('rmdb_get_film_terms_and_fields', 'rmdb_get_film_terms_and_fields');
 
+
+/**
+*
+*/
+function rmdb_last_5_films() {
+	$args = array(
+		'numberposts' => 5,
+		'orderby' => 'post_date',
+		'order' => 'DESC',
+		'post_type' => 'rmdb_film',
+		'post_status' => 'publish'
+	);
+
+	$recent_posts = wp_get_recent_posts( $args );
+	echo '<h3>Latest 5 Films</h3><hr><ul class="list-group">';
+	foreach( $recent_posts as $recent ){
+		echo '<li class="list-group-item"><a href="' . get_permalink($recent["ID"]) . '">' . $recent["post_title"].'</a> </li> ';
+	}
+	echo '</ul>';
+	wp_reset_query();
+}
+add_shortcode('rmdb_last_5_films', 'rmdb_last_5_films');
+
 ?>
