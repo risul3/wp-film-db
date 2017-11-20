@@ -22,6 +22,7 @@
 
 	<div class="entry-content">
 		<?php the_content(); ?>
+		<?php do_action('rmdb_get_film_terms_and_fields'); // Hook film terms and fields ?>
 		<?php
 			wp_link_pages( array(
 				'before' => '<div class="page-links">' . __( 'Pages:', 'unite' ),
